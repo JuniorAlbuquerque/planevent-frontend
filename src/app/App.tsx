@@ -1,7 +1,13 @@
 import React from 'react';
+import GlobalStyles from '../presentation/styles/GlobalStyles';
 
-function App() {
-  return <h1>PlanEvent</h1>
+const App: React.FC = () => {
+  return (
+    <>
+      <h1>Planevent</h1>
+      <GlobalStyles />
+    </>
+  );
 }
 
 export default App;
