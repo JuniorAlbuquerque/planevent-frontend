@@ -27,4 +27,17 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  :root {
+    --primary: #2B2866;
+    --secondary: #E7E5FF;
+    --purpleLight: #6C63FF;
+    --buttonColor: #E7E5FF;
+    --inputColor: #F4F3FF;
+    --cancel: #FF8484;
+    --blueLight: #67F0F0;
+    --white: #fff;
+    --black: #000;
+    --gray: #ECECEC;
+  }
 `;
