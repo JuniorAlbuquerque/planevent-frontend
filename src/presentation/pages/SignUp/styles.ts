@@ -85,15 +85,6 @@ export const Content = styled.div`
       font-size: 14px;
       margin-top: 14px;
     }
-
-    select {
-      background: var(--inputColor);
-      border: 0;
-
-      padding: 14px;
-      border-radius: 8px;
-      margin: 4px 0px 20px;
-    }
   }
 
   @media(max-width: 900px) {
