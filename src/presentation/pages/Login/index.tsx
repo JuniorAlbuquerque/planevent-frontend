@@ -1,4 +1,5 @@
 import React from 'react';
+import { Form } from '@unform/web';
 
 import { Container, Content, Background } from './styles';
 
@@ -12,6 +13,10 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 const Login: React.FC = () => {
+  function handleSubmit(data: object): void {
+    console.log(data);
+  }
+
   return (
     <Container>
       <Background>
@@ -25,7 +30,7 @@ const Login: React.FC = () => {
 
         <h1>Login</h1>
 
-        <form action="">
+        <Form onSubmit={handleSubmit}>
           <label htmlFor="">E-mail</label>
           <Input name="email"/>
 
@@ -35,7 +40,7 @@ const Login: React.FC = () => {
           <Button icon={FiLogIn}>Entrar</Button>
 
           <a href="forgot">Cadastre-se</a>
-        </form>
+        </Form>
       </Content>
     </Container>
   );

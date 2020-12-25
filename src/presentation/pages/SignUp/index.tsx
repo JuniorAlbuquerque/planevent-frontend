@@ -1,6 +1,5 @@
 import React from 'react';
-
-import { Container, Content, Background } from './styles';
+import { Form } from '@unform/web';
 
 import logo from '../../../assets/logo.svg';
 import logodark from '../../../assets/logo-dark.svg';
@@ -10,8 +9,16 @@ import { FiLogIn } from '../../styles/Icons';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import Select from '../../components/Select';
+
+import { Container, Content, Background } from './styles';
 
 const SignUp: React.FC = () => {
+
+  function handleSubmit(data: object): void {
+    console.log(data);
+  }
+
   return (
     <Container>
       <Background>
@@ -25,7 +32,7 @@ const SignUp: React.FC = () => {
 
         <h1>Cadastro</h1>
 
-        <form action="">
+        <Form onSubmit={handleSubmit}>
           <label htmlFor="nome">Nome</label>
           <Input name="nome"/>
 
@@ -39,15 +46,15 @@ const SignUp: React.FC = () => {
           <Input name="datanascimento" type="date"/>
 
           <label htmlFor="sexo">Sexo</label>
-          <select name="sexo">
-            <option value="A">Masculino</option>
-            <option value="B">Feminino</option>
-          </select>
+          <Select name="sexo">
+            <option value="Masculino">Masculino</option>
+            <option value="Feminino">Feminino</option>
+          </Select>
 
-          <Button icon={FiLogIn}>Entrar</Button>
+          <Button icon={FiLogIn}>Cadastrar</Button>
 
           <a href="forgot">Fazer login</a>
-        </form>
+        </Form>
       </Content>
     </Container>
   );
