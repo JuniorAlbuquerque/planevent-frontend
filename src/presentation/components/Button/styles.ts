@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.button`
   display: flex;
   align-items: center;
+  justify-content: center;
 
   background: var(--primary);
   color: var(--white);
@@ -12,6 +13,7 @@ export const Container = styled.button`
   border-radius: 8px;
 
   margin-top: 16px;
+  position: relative;
 
   &:hover {
     filter: brightness(85%);
@@ -22,7 +24,7 @@ export const Container = styled.button`
     cursor: pointer;
     stroke: var(--white);
 
-    margin-right: 35%;
-    float: left;
+    position: absolute;
+    left: 14px;
   }
 `;
