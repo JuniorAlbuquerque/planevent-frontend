@@ -6,6 +6,11 @@ import logo from '../../../assets/logo.svg';
 import logodark from '../../../assets/logo-dark.svg';
 import planbg from '../../../assets/plan-art-bg.svg';
 
+import { FiLogIn } from '../../styles/Icons';
+
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+
 const Login: React.FC = () => {
   return (
     <Container>
@@ -22,14 +27,12 @@ const Login: React.FC = () => {
 
         <form action="">
           <label htmlFor="">E-mail</label>
-          <input type="text"/>
+          <Input name="email"/>
 
           <label htmlFor="">Senha</label>
-          <input type="password"/>
+          <Input name="password" type="password"/>
 
-          <button type="submit">
-            Entrar
-          </button>
+          <Button icon={FiLogIn}>Entrar</Button>
 
           <a href="forgot">Cadastre-se</a>
         </form>

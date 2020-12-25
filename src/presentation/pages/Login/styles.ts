@@ -77,31 +77,6 @@ export const Content = styled.div`
     flex-direction: column;
     text-align: justify;
 
-    input {
-      background: var(--inputColor);
-      border: 0;
-
-      padding: 14px;
-      border-radius: 8px;
-      margin: 4px 0px 20px;
-    }
-
-    button {
-      background: var(--primary);
-      color: var(--white);
-
-      border: 0;
-      padding: 14px;
-      border-radius: 8px;
-
-      margin-top: 16px;
-
-      &:hover {
-        filter: brightness(85%);
-        transition: .25s ease;
-      }
-    }
-
     a {
       text-decoration: none;
       align-self: flex-end;
