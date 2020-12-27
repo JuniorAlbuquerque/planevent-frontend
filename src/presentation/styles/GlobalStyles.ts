@@ -30,7 +30,6 @@ export default createGlobalStyle`
 
   :root {
     --primary: #2B2866;
-    --secondary: #E7E5FF;
     --purpleLight: #6C63FF;
     --buttonColor: #E7E5FF;
     --inputColor: #F4F3FF;
@@ -39,5 +38,6 @@ export default createGlobalStyle`
     --white: #fff;
     --black: #000;
     --gray: #ECECEC;
+    --textGray: #A9A9A9;
   }
 `;
