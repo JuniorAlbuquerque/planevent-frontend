@@ -68,5 +68,5 @@ export const Item = styled.div<Props>`
 `
 
 export const Content = styled.div`
-
+  flex: 1;
 `;
