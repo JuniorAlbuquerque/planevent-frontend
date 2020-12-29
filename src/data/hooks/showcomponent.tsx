@@ -22,7 +22,7 @@ export function useShowComponent() {
   const context = useContext(ComponentContextSidebar);
 
   if(!context) {
-    throw new Error('useToggle must be used within an ComponentProvider');
+    throw new Error('useShowComponent must be used within an ComponentProvider');
   }
 
   return context;
