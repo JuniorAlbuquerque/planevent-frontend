@@ -20,6 +20,15 @@ export default createGlobalStyle`
     font-size: 16px;
   }
 
+  button {
+    border: none;
+
+    &:hover {
+      filter: brightness(85%);
+      transition: .3s ease-out;
+    }
+  }
+
   h1, h2, h3, h4, h5, h6, strong {
     font-weight: 500;
   }
