@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Form } from '@unform/web';
 
 import { Container, Content, Background } from './styles';
@@ -7,15 +7,26 @@ import logo from '../../../assets/logo.svg';
 import logodark from '../../../assets/logo-dark.svg';
 import planbg from '../../../assets/plan-art-bg.svg';
 
+import { useAuth } from '../../../data/hooks/AuthContext';
+
 import { FiLogIn } from '../../styles/Icons';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
+export interface SignInCredentials {
+  email: string;
+  password: string;
+}
+
 const Login: React.FC = () => {
-  function handleSubmit(data: object): void {
-    console.log(data);
-  }
+  const { signIn } = useAuth();
+  const handleSubmit = useCallback(async (data: SignInCredentials) => {
+    signIn({
+      email: data.email,
+      password: data.password
+    })
+  }, [signIn]);
 
   return (
     <Container>
