@@ -5,13 +5,17 @@ import Login from '../presentation/pages/Login';
 import Home from '../presentation/pages/Home';
 
 import ComponentProvider from '../data/hooks/showcomponent';
+import AuthProvider from '../data/hooks/AuthContext';
 
 const App: React.FC = () => {
   return (
     <>
-      <ComponentProvider>
+      <AuthProvider>
+        <Login />
+      </AuthProvider>
+      {/* <ComponentProvider>
         <Home />
-      </ComponentProvider>
+      </ComponentProvider> */}
       <GlobalStyles />
     </>
   );
