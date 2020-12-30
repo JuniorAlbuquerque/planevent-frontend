@@ -1,48 +1,26 @@
 import React from 'react';
 
-import { Container, Card, CardHeader, CardBody, DateEvent, Local } from './styles';
-
-import { FaSlideshare, GrDiamond } from '../../styles/Icons';
+import { Container } from './styles';
+import Card from '../../components/Card';
 
 const ActuallyEvents: React.FC = () => {
   return (
     <Container>
-      <Card>
-        <CardHeader>
-          <h2>PG Elias</h2>
+      <Card
+        name='PG Elias'
+        description='Pequeno grupo criado pelos membros da Igreja do Nogueira Júnior com o objetivo de estudar e aprender mais sobre a palavra de Deus'
+        date='14/12/2020'
+        local= 'Rua Eduardo Ribeiro, nº 3895, Jauary 2'
+        type='Compartilhado'
+      />
 
-          <FaSlideshare size={30} color={'var(--blueLight)'} />
-        </CardHeader>
-
-        <CardBody>
-          <p>
-            Pequeno grupo criado pelos membros da Igreja do Nogueira Júnior com o objetivo de estudar e aprender mais sobre a palavra de Deus
-          </p>
-        </CardBody>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <h2>Treinamento Desbravadores</h2>
-
-          <GrDiamond className="exclusive" size={30} color={'var(--blueLight)'} />
-        </CardHeader>
-
-        <CardBody>
-          <p>
-          Orientações para o ministério dos desbravadores, tratamento de questões administrativas necessárias para o bom andamento da Igreja.
-          Repassaremos o protótipo de calendário antecipado por nossa Associação e a ênfase que daremos em 2021.
-          </p>
-
-          <DateEvent>
-
-          </DateEvent>
-
-          <Local>
-
-          </Local>
-        </CardBody>
-      </Card>
+      <Card
+        name='PG Elias'
+        description='Pequeno grupo criado pelos membros da Igreja do Nogueira Júnior com o objetivo de estudar e aprender mais sobre a palavra de Deus'
+        date='14/12/2020'
+        local= 'Rua Eduardo Ribeiro, nº 3895, Jauary 2'
+        type='Compartilhado'
+      />
     </Container>
   );
 }

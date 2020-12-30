@@ -40,6 +40,7 @@ export default createGlobalStyle`
   :root {
     --primary: #2B2866;
     --purpleLight: #6C63FF;
+    --purple: #9F99FF;
     --buttonColor: #E7E5FF;
     --inputColor: #F4F3FF;
     --cancel: #FF8484;
