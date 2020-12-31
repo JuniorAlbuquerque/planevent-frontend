@@ -82,6 +82,10 @@ export const Profile = styled.div`
 
   align-items: center;
 
+  div {
+    display: flex;
+  }
+
   img {
     width: 80px;
     margin-bottom: 10px;
@@ -94,7 +98,15 @@ export const Profile = styled.div`
   a {
     font-size: 14px;
     text-decoration: none;
+    margin-right: 8px;
 
     color: var(--purpleLight);
+  }
+
+  button {
+    background: none;
+    font-size: 14px;
+
+    color: var(--cancel);
   }
 `;
