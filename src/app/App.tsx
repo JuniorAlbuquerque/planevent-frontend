@@ -1,23 +1,22 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import GlobalStyles from '../presentation/styles/GlobalStyles';
 
-import Login from '../presentation/pages/Login';
-import Home from '../presentation/pages/Home';
+import Routes from '../infra/routes';
 
 import ComponentProvider from '../data/hooks/showcomponent';
 import AuthProvider from '../data/hooks/AuthContext';
 
 const App: React.FC = () => {
   return (
-    <>
+    <Router>
       <AuthProvider>
-        <Login />
+        <ComponentProvider>
+            <Routes />
+        </ComponentProvider>
       </AuthProvider>
-      {/* <ComponentProvider>
-        <Home />
-      </ComponentProvider> */}
       <GlobalStyles />
-    </>
+    </Router>
   );
 }
 
