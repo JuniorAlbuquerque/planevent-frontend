@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { Form } from '@unform/web';
 
 import { Container, Content, Background } from './styles';
@@ -21,6 +22,7 @@ export interface SignInCredentials {
 
 const Login: React.FC = () => {
   const { signIn } = useAuth();
+
   const handleSubmit = useCallback(async (data: SignInCredentials) => {
     signIn({
       email: data.email,
@@ -50,7 +52,7 @@ const Login: React.FC = () => {
 
           <Button icon={FiLogIn}>Entrar</Button>
 
-          <a href="forgot">Cadastre-se</a>
+          <Link to="/signup">Cadastre-se</Link>
         </Form>
       </Content>
     </Container>
