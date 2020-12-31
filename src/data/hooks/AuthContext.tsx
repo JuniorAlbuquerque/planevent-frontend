@@ -1,4 +1,5 @@
 import React, { useContext, createContext, useCallback, useState } from 'react';
+import { useHistory  } from 'react-router-dom';
 
 import api from '../../infra/services/api';
 
@@ -9,14 +10,17 @@ interface SignInCredentials {
 
 interface Auth {
   user: {
+    id: number,
     name: string,
     email: string
   };
   signIn(credentials: SignInCredentials): Promise<void>;
+  signOut(): void;
 }
 
 interface AuthState {
   user: {
+    id: number,
     name: string,
     email: string
   };
@@ -25,8 +29,10 @@ interface AuthState {
 const AuthContextData = createContext<Auth>({} as Auth);
 
 const AuthContext: React.FC = ({children}) => {
+  const history = useHistory();
+
   const [data, setData] = useState<AuthState>(() => {
-    const user = localStorage.getItem('@CalComp:user');
+    const user = localStorage.getItem('@PlanEvent:user');
 
     if (user) {
       return { user: JSON.parse(user) };
@@ -40,22 +46,29 @@ const AuthContext: React.FC = ({children}) => {
       const response = await api.post('/user/login', { email, password });
 
       const userData = {
+        id: response.data.id,
         name: response.data.name,
         email: response.data.email
       };
 
+      localStorage.setItem('@PlanEvent:user', JSON.stringify(userData));
+
       setData({ user: userData });
 
-      console.log(response.data);
-
-      return response.data;
+      history.push('/home');
     } catch (error) {
-      console.log(error);
+      alert('Erro de validação');
     }
+  }, [history]);
+
+  const signOut = useCallback(() => {
+    localStorage.removeItem('@PlanEvent:user');
+
+    setData({} as AuthState);
   }, []);
 
   return (
-    <AuthContextData.Provider value={{ user: data.user, signIn }}>
+    <AuthContextData.Provider value={{ user: data.user, signIn, signOut }}>
       {children}
     </AuthContextData.Provider>
   )
