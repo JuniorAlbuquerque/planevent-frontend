@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import {
   Container,
@@ -8,6 +8,7 @@ import {
 
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
+import Actually from '../../renders/ActuallyEvents';
 
 import { useShowComponent } from '../../../data/hooks/showcomponent';
 
@@ -16,7 +17,11 @@ export interface Props {
 }
 
 const Home: React.FC = () => {
-  const { component } = useShowComponent();
+  const { component, setShowComponent } = useShowComponent();
+
+  useEffect(() => {
+    setShowComponent(<Actually />);
+  }, [setShowComponent]);
 
   return (
     <Container>
