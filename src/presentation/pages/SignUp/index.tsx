@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { Form } from '@unform/web';
+
+import api from '../../../infra/services/api';
 
 import logo from '../../../assets/logo.svg';
 import logodark from '../../../assets/logo-dark.svg';
@@ -14,10 +17,18 @@ import Select from '../../components/Select';
 import { Container, Content, Background } from './styles';
 
 const SignUp: React.FC = () => {
+  const history = useHistory();
 
-  function handleSubmit(data: object): void {
-    console.log(data);
-  }
+  const handleSubmit = useCallback(async (data: object) => {
+    try {
+      await api.post('/user', data);
+
+      alert('Cadastro efetuado');
+      history.push('/');
+    } catch (error) {
+      alert('Error');
+    }
+  }, []);
 
   return (
     <Container>
@@ -33,27 +44,27 @@ const SignUp: React.FC = () => {
         <h1>Cadastro</h1>
 
         <Form onSubmit={handleSubmit}>
-          <label htmlFor="nome">Nome</label>
-          <Input name="nome"/>
+          <label htmlFor="name">Nome</label>
+          <Input name="name" required/>
 
           <label htmlFor="email">E-mail</label>
-          <Input name="email"/>
+          <Input name="email" type="email" required/>
 
           <label htmlFor="password">Senha</label>
-          <Input name="password" type="password"/>
+          <Input name="password" required type="password"/>
 
           <label htmlFor="datanascimento">Data de nascimento</label>
-          <Input name="datanascimento" type="date"/>
+          <Input name="birthdate" type="date"/>
 
           <label htmlFor="sexo">Sexo</label>
-          <Select name="sexo">
+          <Select name="sex">
             <option value="Masculino">Masculino</option>
             <option value="Feminino">Feminino</option>
           </Select>
 
           <Button icon={FiLogIn}>Cadastrar</Button>
 
-          <a href="forgot">Fazer login</a>
+          <Link to="/">Fazer login</Link>
         </Form>
       </Content>
     </Container>
