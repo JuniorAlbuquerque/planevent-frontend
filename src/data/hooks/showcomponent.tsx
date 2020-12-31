@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext } from 'react';
-import EmptyComponent from '../../presentation/renders/EmptyList';
+import ActuallyComponent from '../../presentation/renders/ActuallyEvents';
 
 interface ComponentInterface {
   component: any;
@@ -9,7 +9,7 @@ interface ComponentInterface {
 const ComponentContextSidebar = createContext<ComponentInterface> ({} as ComponentInterface);
 
 const ShowComponent: React.FC = ({ children }) => {
-  const [showComponent, setShowComponent] = useState(<EmptyComponent />);
+  const [showComponent, setShowComponent] = useState(<ActuallyComponent />);
 
   return (
     <ComponentContextSidebar.Provider value={{ component: showComponent, setShowComponent }}>
