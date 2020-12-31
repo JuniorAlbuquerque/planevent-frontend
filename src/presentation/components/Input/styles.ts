@@ -7,4 +7,7 @@ export const Container = styled.input`
   padding: 14px;
   border-radius: 8px;
   margin: 4px 0px 20px;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
 `;
