@@ -12,7 +12,8 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-   width: 100%;
+  width: 100%;
+  margin-left: 290px;
 `;
 
 export const Header = styled.div`
@@ -55,15 +56,24 @@ export const Buttons = styled.div`
   align-items: center;
   justify-content:center;
 
-  button {
+  button, a {
     margin: 14px;
     background: var(--purpleLight);
 
     padding: 14px 34px;
 
-    & + button {
-      background: #FBB540;
+    &:hover {
+      filter: brightness(85%);
+      transition: .35s ease-out;
     }
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--white);
+
+    border-radius: 8px;
+    background: #FBB540;
   }
 `;
 

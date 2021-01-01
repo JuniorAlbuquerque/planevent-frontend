@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { Form } from '@unform/web';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import api from '../../../infra/services/api';
 import { useAuth } from '../../../data/hooks/AuthContext';
@@ -14,15 +14,15 @@ import { Container, Wrapper, Header, Content, Row, ContentRow, Buttons } from '.
 
 const CreateEvent: React.FC = () => {
   const { user } = useAuth();
+  const history = useHistory();
 
   const handleSubmit = useCallback(async (data: object) => {
-    try {
-      await api.post('/event', data);
-
-      alert('Evento criado')
-    } catch (error) {
-      alert('Error');
-    }
+      await api.post('/event', data).then(() => {
+        alert('Evento criado com sucesso');
+        history.push('/home');
+      }).catch(error => {
+        alert(error.response.data.error.message)
+      });
   }, []);
 
   return (
@@ -76,13 +76,13 @@ const CreateEvent: React.FC = () => {
             </Row>
 
             <Buttons>
-              <Button>
+              <Button type="submit">
                 Criar Evento
               </Button>
 
-              <Button>
+              <Link to='/home'>
                 Cancelar
-              </Button>
+              </Link>
             </Buttons>
           </Form>
         </Content>
