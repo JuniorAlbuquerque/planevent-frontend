@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import api from '../../../infra/services/api';
@@ -29,29 +29,42 @@ const Search: React.FC = () => {
   function handleInputChange() {
     if (inputRef.current?.type === 'text') {
       inputRef.current.value = '';
+      setFilter('');
       setInputType('date');
     }
     if (inputRef.current?.type === 'date') {
       inputRef.current.value = '';
+      setFilter('');
       setInputType('text');
     }
   }
 
   async function handleSearchEvent (): Promise <void> {
-    if (inputRef.current?.type === 'text') {
-      await api.get<EventType[]>(`event/byname/${filter}`)
-        .then(response => {
-          setEventsSearch(response.data);
-      });
-    }
+    if (filter === '') {
+      alert('Digite sua busca');
+    } else {
+      if (inputRef.current?.type === 'text') {
+        await api.get<EventType[]>(`event/byname/${filter}`)
+          .then(response => {
+            setEventsSearch(response.data);
+        });
+      }
 
-    if (inputRef.current?.type === 'date') {
-      await api.get<EventType[]>(`event/bydate/${filter}`)
-        .then(response => {
-          setEventsSearch(response.data);
-      });
+      if (inputRef.current?.type === 'date') {
+        await api.get<EventType[]>(`event/bydate/${filter}`)
+          .then(response => {
+            setEventsSearch(response.data);
+        });
+      }
     }
   }
+
+  useEffect(() => {
+    api.get<EventType[]>('event')
+      .then(response => {
+        setEventsSearch(response.data);
+    });
+  }, []);
 
   return (
     <Container>
@@ -84,6 +97,7 @@ const Search: React.FC = () => {
           {
             eventsSearch.map(ev => (
             <CardEvent
+              key={ev.id}
               id={ev.id}
               name={ev.name}
               description={ev.description}
@@ -93,7 +107,6 @@ const Search: React.FC = () => {
             />
             ))
           }
-
         </Content>
       </Wrapper>
     </Container>
