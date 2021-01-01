@@ -18,7 +18,6 @@ const Sidebar: React.FC = () => {
 
       <Buttons>
         <Button>
-
             <span>
               Novo evento
             </span>

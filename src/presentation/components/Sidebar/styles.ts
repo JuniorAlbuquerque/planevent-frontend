@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: grid;
+  position: fixed;
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto;
   height: 100vh;
@@ -101,6 +102,11 @@ export const Profile = styled.div`
     margin-right: 8px;
 
     color: var(--purpleLight);
+
+    &:hover {
+      filter: brightness(85%);
+      transition: .35s ease-out;
+    }
   }
 
   button {

@@ -12,7 +12,8 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-   width: 100%;
+  width: 100%;
+  margin-left: 290px;
 `;
 
 export const Header = styled.div`
