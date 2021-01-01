@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { Container } from './styles';
 
@@ -11,7 +12,9 @@ const EmptyList: React.FC = () => {
 
       <p>Ops, você não está participando de nenhum evento no momento</p>
 
-      <button>Procurar eventos?</button>
+      <Link to='/search'>
+        <button>Procurar eventos?</button>
+      </Link>
     </Container>
   );
 }
