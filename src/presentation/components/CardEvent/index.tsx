@@ -1,13 +1,42 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
 
 import { Container, CardHead, CardBody, CardBodyInfo, Info, ButtonParticipate } from './styles';
 
 import { Events as EventType } from '../../../data/protocols/events';
 
+import api from '../../../infra/services/api';
+import { useAuth } from '../../../data/hooks/AuthContext';
 
 import { FaSlideshare, GrDiamond, MdDateRange, GrLocation } from '../../styles/Icons';
 
 const CardEvent: React.FC<EventType> = ({ id, name, description, date, local, type }) => {
+  const { user } = useAuth();
+  const history = useHistory();
+
+  const handleAssociateEvent = useCallback(async () => {
+    await api.post('/userevent/associate', { email: user.email, eventid: id })
+      .then(response => {
+        Swal.fire({
+          title: 'Sucesso!',
+          text: response.data.success.message,
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }).then(() => {
+          history.push('/home');
+        });
+      }).catch(error => {
+        Swal.fire({
+          title: 'Erro!',
+          text: error.response.data.error.message,
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
+      })
+  }, [id, user.email, history]);
+
   return (
     <Container>
       <CardHead>
@@ -38,7 +67,7 @@ const CardEvent: React.FC<EventType> = ({ id, name, description, date, local, ty
             </span>
           </Info>
         </CardBodyInfo>
-        <ButtonParticipate>
+        <ButtonParticipate onClick={handleAssociateEvent}>
           Participar
         </ButtonParticipate>
       </CardBody>
