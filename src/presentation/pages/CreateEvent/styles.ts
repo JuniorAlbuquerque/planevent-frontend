@@ -41,6 +41,10 @@ export const Content = styled.div`
 
 export const Row = styled.div`
   display: flex;
+
+  @media(max-width: 986px) {
+    flex-direction: column;
+  }
 `;
 
 export const ContentRow = styled.div`
