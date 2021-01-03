@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '../../../data/hooks/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 import { Container, Buttons, Button, Icon, Profile } from './styles';
 
@@ -11,6 +11,7 @@ import { MdAdd, FiSearch } from '../../styles/Icons';
 
 const Sidebar: React.FC = () => {
   const { user, signOut } = useAuth();
+  const params = useRouteMatch();
 
   return (
     <Container>
@@ -21,7 +22,7 @@ const Sidebar: React.FC = () => {
             <span>
               Novo evento
             </span>
-          <Link to='/createevent'>
+          <Link to='/new'>
             <Icon>
               <MdAdd size={24}/>
             </Icon>
@@ -48,7 +49,7 @@ const Sidebar: React.FC = () => {
         <p>{user.name}</p>
 
         <div>
-          <a href="profile">Editar perfil</a>
+          <Link to={`/profile/${user.id}`}>Editar perfil</Link>
           <button onClick={signOut}>Sair</button>
         </div>
       </Profile>
