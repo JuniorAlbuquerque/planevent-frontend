@@ -63,6 +63,15 @@ export const Input = styled.div`
   input[type="date"] {
     padding: 13px;
   }
+
+  .clear-filter {
+    background: var(--cancel);
+    padding: 5px 12px;
+    font-size: 14px;
+    margin-left: 12px;
+
+    font-weight: 500;
+  }
 `;
 
 export const Filter = styled.div`

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 import api from '../../../infra/services/api';
@@ -21,7 +21,7 @@ import CardEvent from '../../components/CardEvent';
 import { Events as EventType } from '../../../data/protocols/events';
 
 const Search: React.FC = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>({} as HTMLInputElement);
   const [inputType, setInputType] = useState('text');
   const [filter, setFilter] = useState('');
   const [eventsSearch, setEventsSearch] = useState<EventType[]>([]);
@@ -44,14 +44,20 @@ const Search: React.FC = () => {
       alert('Digite sua busca');
     } else {
       if (inputRef.current?.type === 'text') {
-        await api.get<EventType[]>(`event/byname/${filter}`)
+        await api.get<EventType[]>('event/filter', { params: {
+          Name: filter
+        }})
           .then(response => {
             setEventsSearch(response.data);
         });
       }
 
       if (inputRef.current?.type === 'date') {
-        await api.get<EventType[]>(`event/bydate/${filter}`)
+        await api.get<EventType[]>('event/filter', {
+          params: {
+            Date: filter
+          }
+        })
           .then(response => {
             setEventsSearch(response.data);
         });
@@ -59,12 +65,19 @@ const Search: React.FC = () => {
     }
   }
 
-  useEffect(() => {
+  const getEvents = useCallback(() => {
+    setFilter('');
+    inputRef.current.value = '';
+
     api.get<EventType[]>('event')
-      .then(response => {
-        setEventsSearch(response.data);
+    .then(response => {
+      setEventsSearch(response.data);
     });
   }, []);
+
+  useEffect(() => {
+    getEvents();
+  }, [getEvents]);
 
   return (
     <Container>
@@ -90,6 +103,8 @@ const Search: React.FC = () => {
             <ButtonSearch onClick={handleSearchEvent}>
               <FiSearch size={30} />
             </ButtonSearch>
+
+            <button className="clear-filter" onClick={getEvents}>x</button>
           </Input>
         </Header>
 
