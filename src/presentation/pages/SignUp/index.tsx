@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Form } from '@unform/web';
+import Swal from 'sweetalert2';
 
 import api from '../../../infra/services/api';
 
@@ -23,12 +24,22 @@ const SignUp: React.FC = () => {
     try {
       await api.post('/user', data);
 
-      alert('Cadastro efetuado');
+      Swal.fire({
+        title: 'Sucesso!',
+        text: 'Usuário cadastrado com sucesso!',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      });
       history.push('/');
     } catch (error) {
-      alert('Error');
+      Swal.fire({
+        title: 'Erro!',
+        text: 'Alguma coisa ocorreu de forma inesperada!',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });
     }
-  }, []);
+  }, [history]);
 
   return (
     <Container>

@@ -1,5 +1,6 @@
 import React, { useContext, createContext, useCallback, useState } from 'react';
 import { useHistory  } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 import api from '../../infra/services/api';
 
@@ -57,7 +58,12 @@ const AuthContext: React.FC = ({children}) => {
 
       history.push('/home');
     } catch (error) {
-      alert('Erro de validação');
+      Swal.fire({
+        title: 'Erro!',
+        text: 'Erro de validação de dados',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });
     }
   }, [history]);
 
