@@ -1,28 +1,7 @@
 import React, { useCallback, useContext, createContext } from 'react';
-import { useHistory  } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import api from '../../infra/services/api';
-
-  // const handleDeleteAccount = useCallback(() => {
-  //   Swal.fire({
-  //     title: 'Tem certeza?',
-  //     text: "Apagar sua conta não tem reversão!",
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#3085d6',
-  //     cancelButtonColor: '#d33',
-  //     confirmButtonText: 'Sim, deletar!',
-  //     cancelButtonText: 'Não, cancelar!'
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       Swal.fire(
-  //         'Deletada!',
-  //         `Conta ${params.id_user} excluída com sucesso.`,
-  //         'success'
-  //       )
-  //     }
-  //   })
-  // }, [params.id_user]);
+import { useAuth } from '../../data/hooks/auth';
 
 import { UserData } from '../protocols/user';
 
@@ -34,7 +13,7 @@ interface UserHook {
 const UserContext = createContext<UserHook>({} as UserHook);
 
 const AccountContext: React.FC = ({ children }) => {
-  const history = useHistory();
+  const { signOut } = useAuth();
 
   const updateUser = useCallback(async (user: UserData) => {
     await api.put('/user', user)
@@ -56,8 +35,30 @@ const AccountContext: React.FC = ({ children }) => {
   }, []);
 
   const deleteUser = useCallback(async (id) => {
-    console.log('Delete user: ', id);
-  }, []);
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: "Apagar sua conta não tem reversão!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, deletar!',
+      cancelButtonText: 'Não, cancelar!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await api.delete(`/user/${id}`)
+        .then(() => {
+          Swal.fire(
+            'Deletada!',
+            `Conta excluída com sucesso.`,
+            'success'
+          ).then(() => {
+            signOut();
+          })
+      });
+      }
+    })
+  }, [signOut]);
 
   return (
     <UserContext.Provider value={{ updateUser, deleteUser }}>
