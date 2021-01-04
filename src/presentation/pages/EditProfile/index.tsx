@@ -22,7 +22,7 @@ const EditProfile: React.FC = () => {
   const { updateUser, deleteUser } = useUpAndDel();
   const { params } = useRouteMatch<UserId>();
   const [userdata, setUserData] = useState<UserData>({} as UserData);
-  const sextype = ['Masculino', 'Feminino'];
+  const sextype = [{id: 0, type: 'Masculino'}, {id: 1, type: 'Feminino'}];
 
   const handleSubmit = useCallback(async (data: UserData) => {
     updateUser({
@@ -66,14 +66,14 @@ const EditProfile: React.FC = () => {
             <Row>
               <ContentRow>
                 <label htmlFor="">Nome</label>
-                <Input name="name" value={userdata.name} required/>
+                <Input name="name" defaultValue={userdata.name} required/>
               </ContentRow>
             </Row>
 
             <Row>
               <ContentRow>
                 <label htmlFor="">Email</label>
-                <Input name="email" value={userdata.email} required/>
+                <Input name="email" defaultValue={userdata.email} required/>
               </ContentRow>
             </Row>
 
@@ -83,7 +83,7 @@ const EditProfile: React.FC = () => {
                 <Input name="password" type="password" required/>
               </ContentRow>
 
-              <Input type="hidden" name="id" value={userdata.id} />
+              <Input type="hidden" name="id" defaultValue={userdata.id || undefined} />
             </Row>
 
             <Row>
@@ -91,13 +91,10 @@ const EditProfile: React.FC = () => {
                 <label htmlFor="type">Sexo</label>
                 <Select name="sex" required>
                   {
-                    sextype.map(item =>
-                      item === userdata.sex ?
-                      <option
-                        defaultValue={item}
-                        value={item}>{item}
-                      </option> :
-                      <option value={item}>{item}</option>
+                    sextype.map((item) =>
+                      item.type === userdata.sex ?
+                      <option selected defaultValue={item.type || undefined} key={item.id}>{item.type}</option> :
+                      <option key={item.id} value={item.type || undefined}>{item.type}</option>
                     )
                   }
                 </Select>
@@ -105,7 +102,7 @@ const EditProfile: React.FC = () => {
 
               <ContentRow>
                 <label htmlFor="">Data de nascimento</label>
-                <Input name="birthdate" type="date" required/>
+                <Input name="birthdate" defaultValue={userdata.birthdate || undefined} type="date" required/>
               </ContentRow>
             </Row>
 
