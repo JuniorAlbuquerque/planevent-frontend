@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../../infra/services/api';
-import { useAuth } from '../../../data/hooks/AuthContext';
+import { useAuth } from '../../../data/hooks/auth';
 import Moment from 'moment';
 
 import EmptyList from '../EmptyList';

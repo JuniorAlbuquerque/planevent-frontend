@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../../data/hooks/AuthContext';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useAuth } from '../../../data/hooks/auth';
+import { useShowComponent } from '../../../data/hooks/showcomponent';
 import api from '../../../infra/services/api';
 import Moment from 'moment';
 
@@ -10,14 +11,28 @@ import { Events } from '../../../data/protocols/events';
 
 const CreatedEvents: React.FC = () => {
   const { user } = useAuth();
+  const { render, setRender } = useShowComponent();
   const [eventsUser, setEventsUser] = useState<Events[]>([]);
+
+  const renderAgain = useCallback(async () => {
+    if (render) {
+      await api.get<Events[]>(`/event/user/${user.id}`)
+      .then(response => {
+          setEventsUser(response.data);
+      });
+
+      setRender(false);
+    }
+  }, [render, setRender, user.id]);
 
   useEffect(() => {
     api.get<Events[]>(`/event/user/${user.id}`)
     .then(response => {
         setEventsUser(response.data);
-    })
-  }, [user.id]);
+    });
+
+    renderAgain();
+  }, [user.id, renderAgain]);
 
   return (
     <Container>
@@ -25,6 +40,7 @@ const CreatedEvents: React.FC = () => {
         eventsUser.map(ev => (
           <CardCreated
             key={ev.id}
+            id={ev.id}
             name={ev.name}
             description={ev.description}
             date={Moment(ev.date).format('DD/MM/YYYY')}

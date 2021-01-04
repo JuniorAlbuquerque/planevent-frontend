@@ -2,13 +2,12 @@ import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-
 import { Container, CardHead, CardBody, CardBodyInfo, Info, ButtonParticipate } from './styles';
 
 import { Events as EventType } from '../../../data/protocols/events';
 
 import api from '../../../infra/services/api';
-import { useAuth } from '../../../data/hooks/AuthContext';
+import { useAuth } from '../../../data/hooks/auth';
 
 import { FaSlideshare, GrDiamond, MdDateRange, GrLocation } from '../../styles/Icons';
 

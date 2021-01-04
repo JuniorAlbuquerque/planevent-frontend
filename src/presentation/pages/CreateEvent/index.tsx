@@ -1,9 +1,10 @@
 import React, { useCallback } from 'react';
 import { Form } from '@unform/web';
 import { Link, useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 import api from '../../../infra/services/api';
-import { useAuth } from '../../../data/hooks/AuthContext';
+import { useAuth } from '../../../data/hooks/auth';
 
 import Sidebar from '../../components/Sidebar';
 import Input from '../../components/Input';
@@ -18,12 +19,23 @@ const CreateEvent: React.FC = () => {
 
   const handleSubmit = useCallback(async (data: object) => {
       await api.post('/event', data).then(() => {
-        alert('Evento criado com sucesso');
-        history.push('/home');
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Evento criado com sucesso!',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }).then(() => {
+          history.push('/home');
+        })
       }).catch(error => {
-        alert(error.response.data.error.message)
+        Swal.fire({
+          title: 'Erro!',
+          text: error.response.data.error.message,
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
       });
-  }, []);
+  }, [history]);
 
   return (
     <Container>

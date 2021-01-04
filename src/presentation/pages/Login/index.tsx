@@ -8,7 +8,7 @@ import logo from '../../../assets/logo.svg';
 import logodark from '../../../assets/logo-dark.svg';
 import planbg from '../../../assets/plan-art-bg.svg';
 
-import { useAuth } from '../../../data/hooks/AuthContext';
+import { useAuth } from '../../../data/hooks/auth';
 
 import { FiLogIn } from '../../styles/Icons';
 
