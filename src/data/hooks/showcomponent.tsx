@@ -4,15 +4,18 @@ import ActuallyComponent from '../../presentation/renders/ActuallyEvents';
 interface ComponentInterface {
   component: any;
   setShowComponent: React.Dispatch<React.SetStateAction<any>>;
+  render: boolean;
+  setRender: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ComponentContextSidebar = createContext<ComponentInterface> ({} as ComponentInterface);
 
 const ShowComponent: React.FC = ({ children }) => {
   const [showComponent, setShowComponent] = useState(<ActuallyComponent />);
+  const [render, setRender] = useState(false);
 
   return (
-    <ComponentContextSidebar.Provider value={{ component: showComponent, setShowComponent }}>
+    <ComponentContextSidebar.Provider value={{ component: showComponent, setShowComponent, render, setRender }}>
       {children}
     </ComponentContextSidebar.Provider>
   );
