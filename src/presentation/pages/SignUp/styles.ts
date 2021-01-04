@@ -5,6 +5,11 @@ export const Container = styled.div`
 
   display: flex;
   align-items: stretch;
+
+  @media(max-width: 768px) {
+    height: 100%;
+    justify-content: center;
+  }
 `;
 
 export const Background = styled.div`
@@ -89,6 +94,12 @@ export const Content = styled.div`
 
   @media(max-width: 900px) {
     max-width: 100%;
+    height: 100%;
+    justify-content: center;
+
+    form {
+      margin-top: 20px;
+    }
 
     img {
       display: block;

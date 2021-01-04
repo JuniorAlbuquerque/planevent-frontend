@@ -7,6 +7,10 @@ export const Container = styled.div`
 
   display: flex;
   align-items: stretch;
+
+  @media(max-width: 884px) {
+    flex-direction: column;
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -15,6 +19,10 @@ export const Wrapper = styled.div`
 
   width: 100%;
   margin-left: 290px;
+
+  @media(max-width: 884px) {
+    margin-left: 0px;
+  }
 `;
 
 export const Header = styled.div`
