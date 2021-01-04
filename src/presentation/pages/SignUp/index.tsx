@@ -23,7 +23,6 @@ const SignUp: React.FC = () => {
   const handleSubmit = useCallback(async (data: object) => {
     try {
       await api.post('/user', data);
-
       Swal.fire({
         title: 'Sucesso!',
         text: 'Usuário cadastrado com sucesso!',
@@ -50,7 +49,7 @@ const SignUp: React.FC = () => {
         <p>Gerencie sua agenda aqui</p>
       </Background>
       <Content>
-        <img src={logodark} alt="Planevent"/>
+        {/* <img src={logodark} alt="Planevent"/> */}
 
         <h1>Cadastro</h1>
 
