@@ -27,6 +27,31 @@ export const Container = styled.div`
     justify-self: center;
     margin-bottom: 28px;
   }
+
+  @media(max-width: 884px) {
+    padding: 20px;
+
+    height: 200px;
+    position: relative;
+    max-width: 100%;
+
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "logo profile"
+      "buttons buttons";
+
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 140px;
+      grid-area: logo;
+
+      justify-self: center;
+      margin-bottom: 20px;
+    }
+  }
 `;
 
 export const Buttons = styled.div`
@@ -34,14 +59,21 @@ export const Buttons = styled.div`
   flex-direction: column;
 
   grid-area: buttons;
+
+  @media(max-width: 884px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 export const Button = styled.div`
   background: var(--buttonColor);
-  padding: 24px;
+  padding: 14px;
+  width: 100%;
 
   margin: 10px;
-  border-radius: 28px;
+  border-radius: 20px;
 
   display: flex;
   align-items: center;
@@ -51,7 +83,7 @@ export const Button = styled.div`
     display: inline-block;
     width: 50px;
 
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
   }
 `;
@@ -82,6 +114,12 @@ export const Profile = styled.div`
   flex-direction: column;
 
   align-items: center;
+
+  .user-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
   div {
     display: flex;
@@ -114,5 +152,14 @@ export const Profile = styled.div`
     font-size: 14px;
 
     color: var(--cancel);
+  }
+
+  @media(max-width: 884px) {
+    flex-direction: row-reverse;
+
+    img {
+      width: 60px;
+      margin-bottom: 4px;
+    }
   }
 `;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuth } from '../../../data/hooks/AuthContext';
+import { useAuth } from '../../../data/hooks/auth';
 import { Link, useRouteMatch } from 'react-router-dom';
 
 import { Container, Buttons, Button, Icon, Profile } from './styles';
@@ -44,9 +44,12 @@ const Sidebar: React.FC = () => {
 
 
       <Profile>
-        <img src={avatar} alt="Perfil"/>
+        <div className="user-profile">
+          <img src={avatar} alt="Perfil"/>
 
-        <p>{user.name}</p>
+          <p>{user.name}</p>
+
+        </div>
 
         <div>
           <Link to={`/profile/${user.id}`}>Editar perfil</Link>
